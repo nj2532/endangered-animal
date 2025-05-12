@@ -1,0 +1,125 @@
+<!-- 
+This Vue.js project app lets users record and manage data about endangered animals in Indonesia. 
+It uses `v-if` to switch between the homepage and a form page, and `v-model` to bind user input like animal name, 
+location, category, quantity, and description. Users can also upload an image, which is previewed before saving. 
+All entered data is shown in a dynamic table with search and filter features, and users can edit or delete entries. 
+-->
+
+<div id="app">
+  <!-- Homepage with title, subtitle, and a button to go to the form -->
+  <div v-if="currentPage === 'home'" class="home-wrapper">
+    <div class="home-box">
+      <h1>🐅 Endangered Animal Tracker</h1>
+      <p class="subtitle">Record and review endangered species in Indonesia.</p>
+      <div class="action-section">
+        <img
+          src="https://images.unsplash.com/photo-1723036123278-48b332ad8030?q=80&w=1934&auto=format&fit=crop"
+          alt="Sumatran Tiger"
+          class="hero-img"
+        />
+        <!-- Click to switch to the form page -->
+        <button class="start-btn" @click="currentPage = 'form'">Start Tracking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main form page to input and view animal data -->
+  <div v-if="currentPage === 'form'" class="container">
+
+    <!-- Form for entering new animal data -->
+    <div class="box">
+      <h2>Animal Data Entry</h2>
+
+      <!-- Input fields with Vue v-model binding -->
+      <label>Animal Name:</label>
+      <input v-model="animalName" placeholder="e.g., Sumatran Tiger" />
+
+      <label>Location Found:</label>
+      <input v-model="location" placeholder="e.g., Sumatra Island" />
+
+      <label>Category:</label>
+      <select v-model="category">
+        <option disabled value="">Select Category</option>
+        <option>Mammal</option>
+        <option>Bird</option>
+        <option>Reptile</option>
+        <option>Amphibian</option>
+        <option>Fish</option>
+        <option>Insect</option>
+        <option>Other</option>
+      </select>
+
+      <label>Quantity Found:</label>
+      <input v-model.number="population" type="number" placeholder="e.g., 30" />
+
+      <label>Description:</label>
+      <textarea v-model="description" placeholder="Brief description"></textarea>
+
+      <!-- File input triggers method to convert image to base64 -->
+      <label>Upload Animal Image:</label>
+      <input type="file" @change="handleImageUpload" />
+
+      <!-- Image preview shown if imageBase64 is not empty -->
+      <div v-if="imageBase64" class="preview-box">
+        <p>Image Preview:</p>
+        <img :src="imageBase64" alt="Preview" class="preview-img" />
+      </div>
+
+      <!-- Submit or update button depending on edit mode -->
+      <button @click="addAnimal">{{ editIndex !== null ? 'Update' : 'Add' }}</button>
+      <button @click="resetForm" type="button" class="secondary-btn">Reset</button>
+    </div>
+
+    <!-- Table section showing all added animals -->
+    <div class="box">
+      <h2>Summary Table</h2>
+
+      <!-- Search and category filter -->
+      <input v-model="searchQuery" placeholder="Search..." class="search-bar" />
+      <select v-model="selectedCategory" class="filter-dropdown">
+        <option value="">All Categories</option>
+        <option>Mammal</option>
+        <option>Bird</option>
+        <option>Reptile</option>
+        <option>Amphibian</option>
+        <option>Fish</option>
+        <option>Insect</option>
+        <option>Other</option>
+      </select>
+
+      <!-- Table dynamically populated from Firestore -->
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Category</th>
+            <th>Qty</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(animal, index) in filteredAnimals" :key="animal.id">
+            <td><img :src="animal.image" width="50" height="50" style="object-fit: cover; border-radius: 4px;" /></td>
+            <td>{{ animal.name }}</td>
+            <td>{{ animal.location }}</td>
+            <td>{{ animal.category }}</td>
+            <td>{{ animal.population }}</td>
+            <td>{{ animal.description }}</td>
+            <td>
+              <button @click="editAnimal(index)">Edit</button>
+              <button @click="deleteAnimal(index)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Back to homepage -->
+    <div class="form-footer">
+      <button class="secondary-btn" @click="currentPage = 'home'">← Back to Home</button>
+    </div>
+  </div>
+</div>

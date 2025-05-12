@@ -1,0 +1,235 @@
+/* 
+In this CSS, we use a soft gradient background and a glassmorphism-inspired design with blurred, semi-transparent boxes. 
+Input fields, buttons, and tables are styled for clarity and accessibility. The layout is responsive, 
+so it works well on both desktop and mobile. We’ve customized form elements, added hover effects for 
+interactivity, and used color to highlight important areas like titles and buttons.
+*/
+
+/* Background Layer */
+body {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e3e8ff 50%, #f9fafb 100%);
+  background-attachment: fixed;
+  font-family: 'Inter', sans-serif;
+  color: #111827;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container Layout */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 48px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Typography */
+h2 {
+  color: #6d28d9;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Inputs & Controls */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #f8fafc;
+  color: #111827;
+  transition: 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #7c3aed;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+/* Buttons */
+button {
+  padding: 12px 22px;
+  background: linear-gradient(to right, #7c3aed, #8b5cf6);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
+}
+
+.secondary-btn {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.secondary-btn:hover {
+  background: #d1d5db;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: linear-gradient(to right, #7c3aed, #8b5cf6);
+  color: white;
+  font-weight: 500;
+}
+
+/* Search & Filter */
+.search-bar,
+.filter-dropdown {
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #f1f5f9;
+  font-size: 0.95rem;
+}
+
+/* Image Preview */
+.preview-box {
+  padding: 16px;
+  border-radius: 16px;
+  margin: 20px 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ddd6fe;
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.06);
+}
+
+.preview-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-top: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Homepage */
+.home-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px;
+  background: transparent;
+}
+
+.home-box {
+  background: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  padding: 60px 48px;
+  border-radius: 28px;
+  box-shadow: 0 16px 48px rgba(124, 58, 237, 0.1);
+  max-width: 720px;
+  width: 100%;
+}
+
+.home-box h1 {
+  color: #6d28d9;
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 30px;
+}
+
+.hero-img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.start-btn {
+  padding: 14px 32px;
+  font-size: 1rem;
+  background: linear-gradient(to right, #7c3aed, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.2);
+}
+
+.start-btn:hover {
+  background: linear-gradient(to right, #6d28d9, #7c3aed);
+}
+
+/* Footer */
+.form-footer {
+  grid-column: span 2;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .box {
+    padding: 24px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .home-box {
+    padding: 36px 24px;
+  }
+
+  .hero-img {
+    max-height: 180px;
+  }
+}
